@@ -1,0 +1,8 @@
+- Database name should be “Databits”
+- Create Tables
+    - Department
+    - Designation
+    - Employee
+    - Salary
+    - EmployeeSalary
+- There is the relation between Employee, Department, Designation and Employee and EmployeeSalary
