@@ -1,0 +1,86 @@
+Write Query
+
+1. SELECT Employee FirstName first three characters as Employee Code
+
+```sql
+select left(FirstName,3) as Employeecode
+from Employee
+```
+
+2. Second Highest salary of Employee
+```sql
+select SalaryAmount
+from(select SalaryAmount , DENSE_RANK() over (order by SalaryAmount desc) as rank2
+from Salary) as two
+where rank2 = 2
+```
+
+3. Employee list with Department and Designation
+```sql
+select distinct e.EmployeeID, d.DepartmentName, de.DesignationName
+from Employee e
+join Department d
+on e.DepartmentID = d.DepartmentID
+join Designation de
+on e.DesignationID = de.DesignationID
+```
+
+4. Employee, whom not assigned Department
+```sql
+select FirstName
+from Employee
+where DepartmentID is null
+```
+
+5. Employee, whom not assigned a Designation
+```sql
+select FirstName
+from Employee
+where DesignationID is null
+```
+
+6. Employee have Designation but not Department
+```sql
+select FirstName
+from Employee
+where DesignationID is null and DepartmentID is not null
+```
+
+7. Employee have Department but not Designation
+```sql
+select FirstName
+from Employee
+where DesignationID is not null and DepartmentID is null
+```
+
+8. List all Department Name with Employee, Employee not have Department
+```sql
+select d.DepartmentName, e.FirstName
+from Department d
+left join Employee e 
+on d.DepartmentID = e.DepartmentID
+where e.DepartmentID is null
+```
+
+9. Add new columns of age and create values
+
+-- Adding the column
+ALTER TABLE Employee
+ADD EmployeeAge INT;
+
+-- Updating the values in the column
+UPDATE Employee
+SET EmployeeAge = 
+    CASE 
+        WHEN EmployeeID = 1 THEN 25
+        WHEN EmployeeID = 2 THEN 30
+        WHEN EmployeeID = 3 THEN 28
+        when EmployeeID = 4 then 21
+		when EmployeeID = 5 then 20
+		when EmployeeID = 6 then 29
+		when EmployeeID = 7 then 25
+		when EmployeeID = 8 then 28
+		when EmployeeID = 9 then 23
+		when EmployeeID = 10 then 27
+        ELSE 0  
+    END;
