@@ -2,13 +2,13 @@ Write Query
 
 1. SELECT Employee FirstName first three characters as Employee Code
 
-```sql
+```SQL
 select left(FirstName,3) as Employeecode
 from Employee
 ```
 
 2. Second Highest salary of Employee
-```sql
+```SQL
 select SalaryAmount
 from(select SalaryAmount , DENSE_RANK() over (order by SalaryAmount desc) as rank2
 from Salary) as two
@@ -16,7 +16,7 @@ where rank2 = 2
 ```
 
 3. Employee list with Department and Designation
-```sql
+```SQL
 select distinct e.EmployeeID, d.DepartmentName, de.DesignationName
 from Employee e
 join Department d
@@ -26,35 +26,35 @@ on e.DesignationID = de.DesignationID
 ```
 
 4. Employee, whom not assigned Department
-```sql
+```SQL
 select FirstName
 from Employee
 where DepartmentID is null
 ```
 
-5. Employee, whom not assigned a Designation
-```sql
+5. Employee, who not assigned a Designation
+```SQL
 select FirstName
 from Employee
 where DesignationID is null
 ```
 
-6. Employee have Designation but not Department
-```sql
+6. Employees have Designation but not Department
+```SQL
 select FirstName
 from Employee
 where DesignationID is null and DepartmentID is not null
 ```
 
-7. Employee have Department but not Designation
-```sql
+7. Employees have Department but not Designation
+```SQL
 select FirstName
 from Employee
 where DesignationID is not null and DepartmentID is null
 ```
 
 8. List all Department Name with Employee, Employee not have Department
-```sql
+```SQL
 select d.DepartmentName, e.FirstName
 from Department d
 left join Employee e 
@@ -62,7 +62,7 @@ on d.DepartmentID = e.DepartmentID
 where e.DepartmentID is null
 ```
 
-9. Add new columns of age and create values
+9. Create a new column of age in the Employee Table
 
 -- Adding the column
 ALTER TABLE Employee
