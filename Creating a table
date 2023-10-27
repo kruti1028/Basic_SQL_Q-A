@@ -7,7 +7,7 @@
     - EmployeeSalary
 - There is a relation between Employee, Department, Designation and Employee and employee salary
 
-```
+```SQL
 --creating database
 CREATE DATABASE Databits;
 GO
