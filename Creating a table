@@ -5,4 +5,109 @@
     - Employee
     - Salary
     - EmployeeSalary
-- There is the relation between Employee, Department, Designation and Employee and EmployeeSalary
+- There is a relation between Employee, Department, Designation and Employee and employee salary
+
+```
+--creating database
+CREATE DATABASE Databits;
+GO
+
+-- use databits database
+USE Databits;
+GO
+
+--creating department table
+create table Department
+(DepartmentID INT primary key,
+ DepartmentName Varchar(50));
+ go
+
+ INSERT INTO Department (DepartmentID, DepartmentName)
+ VALUES 
+(1, 'Human Resources'),
+(2, 'Finance'),
+(3, 'Information Technology'),
+(4, 'Marketing');
+GO
+
+--creating Designation table
+ create table Designation (
+ DesignationID INT Primary key,
+ DesignationName Nvarchar(50));
+ go
+
+ INSERT INTO Designation (DesignationID, DesignationName) 
+ VALUES 
+(1, 'Manager'),
+(2, 'Senior Developer'),
+(3, 'Accountant');
+GO
+
+--creating Employee table
+ create table Employee (
+ EmployeeID int primary key,
+ FirstName varchar(60),
+ LastName VArchar(60),
+ DepartmentID INT,
+ DesignationID INT,
+ FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID),
+ FOREIGN KEY (DesignationID) REFERENCES Designation(DesignationID)
+);
+go
+
+INSERT INTO Employee (EmployeeID, FirstName, LastName, DepartmentID, DesignationID) 
+VALUES 
+(1, 'John', 'Doe', 1, 1),
+(2, 'Jane', 'Smith', 2, 2),
+(3, 'Michael', 'Johnson', 3, 3),
+(4, 'Robert', 'Downey',  1, 1),
+(5, 'Tyler', 'Perry', 1, 1),
+(6, 'Reese', 'Witherspoon', 2, 3),
+(7, 'Jackie', 'Chan', 3, 1),
+(8, 'Guccio', 'Gucci', 3, 2),
+(9, 'Michio', 'Suzuki', 1, 3),
+(10, 'Carlo', 'Guzzi', 1, 1);
+GO
+
+--creating Salary table
+ create table Salary(
+ SalaryID int primary key,
+ SalaryAmount decimal(10, 2),
+);
+ go
+
+ INSERT INTO Salary (SalaryID, SalaryAmount) VALUES 
+(1, 50000.00),
+(2, 70000.00),
+(3, 40000.00),
+(4, 30000.00),
+(5, 80000.00),
+(6, 60000.00),
+(7, 80000.00),
+(8, 50000.00),
+(9, 60000.00),
+(10,70000.00);
+GO
+
+ --creating EmployeeSalary table
+ create table EmployeeSalary
+ (
+ EmployeeID INT,
+ SalaryID INT,
+ FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID),
+ FOREIGN KEY (SalaryID) REFERENCES Salary(SalaryID));
+
+ go
+ INSERT INTO EmployeeSalary (EmployeeID, SalaryID) VALUES 
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(7, 7),
+(8, 8),
+(9, 9),
+(10,10);
+GO
+```
